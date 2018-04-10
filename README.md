@@ -39,3 +39,20 @@ cd your project root direction
 
 code example
 [App.js](https://github.com/danceyoung/react-native-frozenlist/blob/master/App.js)
+     
+
+## Props
+### leftList
+The prop `leftList` will rendering a frozen columns.
+
+    leftList:{
+	    listHeader,
+	    sectionHeader,
+	    renderItem,
+	    sections
+    }
+
+|props  |type  |required  |desc  |
+|--|--|--|--|
+|`listHeader`  |func  |no  |Func returns a element rendered at the top of all items, default is no any style `<View/>`.  |
+|`sectionHeader`  |func  |no  |Func returns a element rendered and sticked at the top of each section, default is no any style `<View/>`.  |
