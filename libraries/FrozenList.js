@@ -4,7 +4,7 @@
  * @flow 
  * @Date: 2018-04-04 10:56:07 
  * @Last Modified by: Young
- * @Last Modified time: 2018-04-09 16:19:11
+ * @Last Modified time: 2018-04-10 16:54:06
  */
 import React, { Component } from 'react'
 import {
@@ -33,16 +33,16 @@ export default class FrozenList extends Component {
     }).isRequired,
   }
 
-  static defaultProps = {
-    leftList: {
-      listHeader: () => { return <View /> },
-      sectionHeader: () => { return <View /> },
-    },
-    rightList: {
-      listHeader: () => { return <View /> },
-      sectionHeader: () => { return <View /> },
-    }
-  }
+  // static defaultProps = {
+  //   leftList: {
+  //     listHeader: () => <View />,
+  //     sectionHeader: (section, sectionIndex) => <View />,
+  //   },
+  //   rightList: {
+  //     listHeader: () => <View />,
+  //     sectionHeader: (section, sectionIndex) => <View />,
+  //   }
+  // }
 
   constructor(props) {
     super(props)
@@ -61,11 +61,29 @@ export default class FrozenList extends Component {
       rightStickyHeaderIndices: [],
 
       leftSections: [],
-      rightSections: []
+      rightSections: [],
+
+      leftListHeader: () => <View />,
+      leftSectionHeader: (section, sectionIndex) => <View />,
+      rightListHeader: () => <View />,
+      rightSectionHeader: (section, sectionIndex) => <View />,
     }
   }
 
   componentDidMount() {
+
+    if (this.props.leftList.listHeader !== undefined) {
+      this.setState({ leftListHeader: this.props.leftList.listHeader })
+    }
+    if (this.props.leftList.sectionHeader !== undefined) {
+      this.setState({ leftSectionHeader: this.props.leftList.sectionHeader })
+    }
+    if (this.props.rightList.listHeader !== undefined) {
+      this.setState({ rightListHeader: this.props.rightList.listHeader })
+    }
+    if (this.props.rightList.sectionHeader !== undefined) {
+      this.setState({ rightSectionHeader: this.props.rightList.sectionHeader })
+    }
 
     this.setState({ leftSections: this.props.leftList.sections })
     this.setState({ rightSections: this.props.rightList.sections })
@@ -91,7 +109,7 @@ export default class FrozenList extends Component {
         key={'favView'}
         style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start' }}>
         <View>
-          {this.props.leftList.listHeader()}
+          {this.state.leftListHeader()}
           <ScrollView
             scrollEventThrottle={16}
             key={'leftscrollview'}
@@ -108,7 +126,7 @@ export default class FrozenList extends Component {
           >
             {this.state.leftSections.map((section, sectionIndex) => {
               var header = <TouchableHighlight key={sectionIndex}>
-                {this.props.leftList.sectionHeader(section, sectionIndex)}
+                {this.state.leftSectionHeader(section, sectionIndex)}
               </TouchableHighlight>
               var items = section.data.map((item, itemIndex) =>
                 this.props.leftList.renderItem(section, sectionIndex, item, itemIndex)
@@ -135,7 +153,7 @@ export default class FrozenList extends Component {
               }}
             >
               {
-                this.props.rightList.listHeader()
+                this.state.rightListHeader()
               }
             </ScrollView>
           </View>
@@ -165,7 +183,7 @@ export default class FrozenList extends Component {
             {
               this.state.rightSections.map((section, sectionIndex) => {
                 var header = <TouchableHighlight key={sectionIndex}>
-                  {this.props.rightList.sectionHeader(section, sectionIndex)}
+                  {this.state.rightSectionHeader(section, sectionIndex)}
                 </TouchableHighlight>
                 var items = section.data.map((item, itemIndex) =>
                   this.props.rightList.renderItem(section, sectionIndex, item, itemIndex)
