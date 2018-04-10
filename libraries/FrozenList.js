@@ -4,15 +4,13 @@
  * @flow 
  * @Date: 2018-04-04 10:56:07 
  * @Last Modified by: Young
- * @Last Modified time: 2018-04-08 14:47:38
+ * @Last Modified time: 2018-04-09 16:19:11
  */
 import React, { Component } from 'react'
 import {
   ScrollView,
   View,
-  Text,
   TouchableHighlight,
-  Alert
 } from 'react-native'
 
 import PropTypes from 'prop-types'
@@ -31,6 +29,7 @@ export default class FrozenList extends Component {
       sectionHeader: PropTypes.func,
       renderItem: PropTypes.func.isRequired,
       sections: PropTypes.array.isRequired,
+      contentContainerWidth: PropTypes.number.isRequired,
     }).isRequired,
   }
 
@@ -57,9 +56,6 @@ export default class FrozenList extends Component {
       leftScrollView: null,
       rightScrollView: null,
       rightHeaderScrollView: null,
-      rowHeight: 40,
-      columnWidth: 80,
-      allColumnWidth: 80 * 13,
 
       leftStickyHeaderIndices: [],
       rightStickyHeaderIndices: [],
@@ -81,10 +77,9 @@ export default class FrozenList extends Component {
 
   _createStickyHeaderIndices(sections) {
     var indices = []
-      for (idx = 0; idx < sections.length; idx++) {
-        idx === 0 ? indices.push(idx) : indices.push(indices[idx - 1] + sections[idx - 1].data.length + 1)
-      }
-    // Alert.alert(JSON.stringify(this.props.sections))
+    for (idx = 0; idx < sections.length; idx++) {
+      idx === 0 ? indices.push(idx) : indices.push(indices[idx - 1] + sections[idx - 1].data.length + 1)
+    }
     return indices
 
   }
@@ -125,23 +120,25 @@ export default class FrozenList extends Component {
           </ScrollView>
         </View>
         <View style={{ flex: 1 }}>
-          <ScrollView
-            horizontal={true}
-            scrollEventThrottle={16}
-            showsHorizontalScrollIndicator={false}
-            showsVerticalScrollIndicator={false}
-            ref={(ref) => this.state.rightHeaderScrollView = ref}
-            onScrollBeginDrag={() => this.rightHeaderScrollViewBeginDragging = true}
-            onScroll={(event) => {
-              if (this.rightHeaderScrollViewBeginDragging) {
-                this.state.rightScrollView.scrollTo({ x: event.nativeEvent.contentOffset.x, y: this.rightScrollViewOffsetY, animated: false });
+          <View>
+            <ScrollView
+              horizontal={true}
+              scrollEventThrottle={16}
+              showsHorizontalScrollIndicator={false}
+              showsVerticalScrollIndicator={false}
+              ref={(ref) => this.state.rightHeaderScrollView = ref}
+              onScrollBeginDrag={() => this.rightHeaderScrollViewBeginDragging = true}
+              onScroll={(event) => {
+                if (this.rightHeaderScrollViewBeginDragging) {
+                  this.state.rightScrollView.scrollTo({ x: event.nativeEvent.contentOffset.x, y: this.rightScrollViewOffsetY, animated: false });
+                }
+              }}
+            >
+              {
+                this.props.rightList.listHeader()
               }
-            }}
-          >
-            {
-              this.props.rightList.listHeader()
-            }
-          </ScrollView>
+            </ScrollView>
+          </View>
 
           <ScrollView
             directionalLockEnabled={true}
@@ -164,7 +161,7 @@ export default class FrozenList extends Component {
               this.rightScrollViewOffsetX = event.nativeEvent.contentOffset.x
               this.rightScrollViewOffsetY = event.nativeEvent.contentOffset.y
             }}
-            contentContainerStyle={{ width: this.state.allColumnWidth }}>
+            contentContainerStyle={{ width: this.props.rightList.contentContainerWidth }}>
             {
               this.state.rightSections.map((section, sectionIndex) => {
                 var header = <TouchableHighlight key={sectionIndex}>
