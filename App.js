@@ -4,7 +4,7 @@
  * @flow 
  * @Date: 2018-04-04 10:59:34 
  * @Last Modified by: Young
- * @Last Modified time: 2018-04-09 16:33:19
+ * @Last Modified time: 2018-04-10 17:15:26
  */
 
 import React, { Component } from 'react';
@@ -18,7 +18,7 @@ import {
   RefreshControl,
   Dimensions
 } from 'react-native';
-import FrozenList from './libraries/FrozenList'
+import { FrozenList } from './index.js'
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const bgColor = '#0D1014'
@@ -30,7 +30,7 @@ export default class App extends Component {
     super(args)
     this.state = {
       rowHeight: 40,
-      rightHeader: ['rate', 'price', 'software', 'weight', 'storage', 'memory', 'graphics', 'battery', 'processor', 'display'],
+      rightHeader: ['RATE', 'PRICE', 'SOFTWARE', 'WEIGHT', 'STORAGE', 'MEMORY', 'GRAPH', 'BATTERY', 'PROCESS', 'DISPLAY'],
       devices: {
         surfacePro: [
           {
@@ -298,7 +298,7 @@ export default class App extends Component {
         <View
           style={{ height: 40, marginLeft: 10, marginRight: 20, justifyContent: 'center', alignItems: 'flex-start' }}>
           <Text
-            style={{ fontSize: 15, fontWeight:'bold' }}>
+            style={{ fontSize: 15, fontWeight: 'bold', color: 'gray' }}>
             {device.name}
           </Text>
           <Text
@@ -337,7 +337,7 @@ export default class App extends Component {
       this.state.rightHeader.map((title) =>
         <Text
           key={title}
-          style={{ color: 'white', fontSize: 15, width: 100 }}>
+          style={[styles.headerText, { width: 100, marginLeft:0 }]}>
           {title}
         </Text>
       )
@@ -351,23 +351,23 @@ export default class App extends Component {
           leftList={{
             listHeader: () => {
               return <View key={'leftscrollviewheader'}
-                style={{ justifyContent: 'center', backgroundColor: iosBlueColor, height: 40 }}>
-                <Text style={{ marginLeft: 10, fontSize: 15, color: 'white', }}>device</Text>
+                style={{ justifyContent: 'center', height: 40 }}>
+                <Text style={styles.headerText}>DEVICE</Text>
               </View>
             },
             sectionHeader: (section, sectionIndex) => {
               if (sectionIndex === 0) {
                 return (
-                  <View style={{ backgroundColor: 'gray', height: 25, justifyContent: 'center' }}>
-                    <Text style={{ marginLeft: 10, fontSize: 15 }}>
+                  <View style={styles.sectionView}>
+                    <Text style={{ marginLeft: 10, fontSize: 20 }}>
                       Surface Pro
                   </Text>
                   </View>
                 )
               } else if (sectionIndex === 1) {
                 return (
-                  <View style={{ backgroundColor: 'gray', height: 25, justifyContent: 'center' }}>
-                    <Text style={{ marginLeft: 10, fontSize: 15 }}>
+                  <View style={styles.sectionView}>
+                    <Text style={{ marginLeft: 10, fontSize: 20 }}>
                       Surface Studio
                     </Text>
                   </View>
@@ -388,13 +388,13 @@ export default class App extends Component {
           }}
           rightList={{
             listHeader: () => {
-              return <View style={{ flexDirection: 'row', alignItems: 'center', height: 40, backgroundColor: iosBlueColor }}>
+              return <View style={{ flexDirection: 'row', alignItems: 'center', height: 40, }}>
                 {this._favHeader()}
               </View>
             },
             sectionHeader: (section, sectionIndex) => {
               return (
-                <View style={{ backgroundColor: 'gray', height: 25, justifyContent: 'center' }}>
+                <View style={styles.sectionView}>
                 </View>
               )
             },
@@ -422,7 +422,19 @@ const styles = StyleSheet.create(
   {
     text: {
       fontSize: 15,
-      width: 100
+      width: 100,
+      color:'gray'
+    },
+    headerText: {
+      marginLeft: 10,
+      fontSize: 18,
+      fontWeight: 'bold',
+      
+    },
+    sectionView: {
+      height: 30,
+      justifyContent: 'center',
+      backgroundColor:'#F8F9F8'
     }
   }
 )
