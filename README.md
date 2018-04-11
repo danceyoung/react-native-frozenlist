@@ -83,3 +83,10 @@ The prop `leftList` will rendering a frozen columns.
 	 `item` - the item object as specified in this section's `data` key
 	 
 	 `itemIndex` - item's index within this section's `data`
+- **sections**
+ 
+ 	**Type**:	array,  **Required**:	Yes
+ 	 
+	The actual data to render.Per section contains `data` for rendering items in this section, like the following 
+	
+    sections:[{data:[]},{data:[]}]
