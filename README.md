@@ -52,7 +52,23 @@ The prop `leftList` will rendering a frozen columns.
 	    sections
     }
 
-|props  |type  |required  |desc  |
-|--|--|--|--|
-|`listHeader`  |func  |no  |Func returns a element rendered at the top of all items, default is no any style `<View/>`.  |
-|`sectionHeader`  |func  |no  |Func returns a element rendered and sticked at the top of each section, default is no any style `<View/>`.  |
+ - **listHeader**
+A element rendered at the top of all items, default is no any style `<View/>`.
+	 **Type**:	function
+	 **Required**:	No
+ - **sectionHeader**
+A  element rendered and sticked at the top of each section, default is no any style `<View/>`.  
+	 **Type**:	function
+	 **Required**:	No
+The function will be passed args with the following keys:
+	 `section` - the full section object as specified in `sections`
+	 `sectionIndex` - section's index within the `sections`
+ - **renderItem**
+ A element rendered  for every item in every section. You can over-ride on a per-section basis.
+	 **Type**:	function
+	 **Required**:	Yes
+ The function will be passed args with the following keys:
+ `section` - the full section object as specified in `sections`
+ `sectionIndex` - section's index within the `sections`
+ `item` - the item object as specified in this section's `data` key
+ `itemIndex` - item's index within this section's `data`
