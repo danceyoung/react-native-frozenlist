@@ -55,7 +55,7 @@ The prop `leftList` will rendering a frozen columns.
 
  - **listHeader**
  
- **Type**:	function, **Required**:	No
+ 	**Type**:	function, **Required**:	No
  
 	A element rendered at the top of all items, default is no any style `<View/>`.
 
