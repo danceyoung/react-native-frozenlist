@@ -90,3 +90,20 @@ The prop `leftList` will rendering a frozen columns.
 	The actual data to render.Per section contains `data` for rendering items in this section, like the following 
 	
     sections:[{data:[]},{data:[]}]
+### rightList
+The prop `rightList` will rendering other columns horizontal scrolling.
+
+    rightList:{
+	    listHeader,
+	    sectionHeader,
+	    renderItem,
+	    sections,
+	    contentContainerWidth
+    }
+The props **listHeader**, **sectionHeader**, **renderItem**, **sections** akin to the corresponding props in `leftList`
+
+ - **contentContainerWidth**
+ 
+	 **Type**: number, **Required**: Yes
+	 
+	Ensure all child views within contentContainer are wraped and visible while horizontal scrolling.
