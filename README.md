@@ -107,3 +107,6 @@ The props **listHeader**, **sectionHeader**, **renderItem**, **sections** akin t
 	 **Type**: number, **Required**: Yes
 	 
 	Ensure all child views within contentContainer are wraped and visible while horizontal scrolling.
+## Licensed
+
+react-native-frozenlist is [MIT Licensed](https://github.com/danceyoung/react-native-frozenlist/blob/master/LICENSE)
