@@ -1,4 +1,3 @@
-
 # React Native FrozenList
 
 A List that just be composited by more ScrollView supports freezing columns, horizontal or vertical scrolling together.
@@ -24,8 +23,8 @@ Because `ScrollView` on Andorid supports vertical scrolling only.
 
 ## Features
 
- - ListHeader
- - SectionHeader
+ - optional ListHeader
+ - optional SectionHeader
  - RenderItem
  - vertical scrolling together
  - horizontal scrolling together
@@ -40,6 +39,9 @@ cd your project root direction
 
 code example
 [App.js](https://github.com/danceyoung/react-native-frozenlist/blob/master/App.js)
+
+    import {FrozenList} from 'react-native-frozenlist'
+    
      
 
 ## Props
@@ -83,9 +85,9 @@ The prop `leftList` will rendering a frozen columns.
 	 `item` - the item object as specified in this section's `data` key
 	 
 	 `itemIndex` - item's index within this section's `data`
-- **sections**
+ - **sections**
  
- 	**Type**:	array,  **Required**:	Yes
+ 	 **Type**:	array,  **Required**:	Yes
  	 
 	The actual data to render.Per section contains `data` for rendering items in this section, like the following 
 	
@@ -106,7 +108,8 @@ The props **listHeader**, **sectionHeader**, **renderItem**, **sections** akin t
  
 	 **Type**: number, **Required**: Yes
 	 
-	Ensure all child views within contentContainer are wraped and visible while horizontal scrolling.
+Ensure all child views within contentContainer are wraped and visible while horizontal scrolling.
+
 ## Licensed
 
 react-native-frozenlist is [MIT Licensed](https://github.com/danceyoung/react-native-frozenlist/blob/master/LICENSE)
