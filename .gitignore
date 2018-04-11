@@ -64,3 +64,11 @@ buck-out/
 .gitattributes
 
 .watchmanconfig
+
+# npmignore
+# android/
+# ios/
+# index.ios.js
+# app.json
+# App.js
+# screenCapture/
